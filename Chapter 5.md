@@ -1,0 +1,5 @@
+-   Chapter 5
+    -   Structs, init, shorthand, ..user1, move if contains non copy-able types
+    -   Why not use reference for println? Does println need to take ownership? [https://stackoverflow.com/questions/30450399/does-println-borrow-or-own-the-variable](https://stackoverflow.com/questions/30450399/does-println-borrow-or-own-the-variable) - printing macros do some magic with references, a "special case" although "every macro could implement this"
+    -   there are 3 way to pass parameter to function: ownership, mutable ref, immutable ref. If we only need to read, we choose immutable ref, that's clear. But how to choose between owning + returning OR mutable borrow?
+    -   " when you call a method with object.something(), Rust automatically adds in &, &mut, or * so object matches the signature of the method." - ist das System elegant??

@@ -1,0 +1,1 @@
+Why trailing comma in enum definition? Not strictly needed but prevents error when shuffling fields around
