@@ -73,7 +73,19 @@ Pattern-matching:
         Ordering::Equal => println!("You win!"),
     }
 ```
-Question: why can't we just compare with `<>`? And pattern-match w.r.t. the boolean type. Or do comparisons return a boolean in Rust?
+
+Question: why can't we just compare with `<>`? And pattern-match w.r.t. the boolean type. Or do comparisons return a boolean in Rust? Answer: we could do it, but we need to handle three cases, not two, so the code is less elegant:
+```
+if guess == secret_number {
+	println!("You win!");
+	break;
+}
+
+match guess < secret_number {
+	true => println!("Too small!"),
+	false => println!("Too big!"),
+}
+```
 
 Type-conversion from `String` to `i32` (the default integer type):
 ```
