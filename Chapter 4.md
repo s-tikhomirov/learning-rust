@@ -247,3 +247,50 @@ The second rule I don't understand:
 > References must always be valid.
 
 What does "valid" mean here? Doesn't the compiler ensure that references are valid, that is, not dangling? The compiler also ensures that the types check out. So what do _I_ have to do to follow the above rule? Or is it descriptive, not prescriptive, like, "this is how Rust behaves"?
+
+### Slices
+A slice is a reference to a part of a collection (like a String). Example of String slices:
+```
+let s = String::from("hello world");
+let hello = &s[0..5];
+let world = &s[6..11];
+```
+Can we omit the first or last indes as Python's `l[:3]`? Yes, this works:
+```
+let hello = &s[..5];
+let world = &s[6..];
+```
+Negative indices that wrap around do not work.
+
+Function to get the first word in a string:
+```
+fn get_first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..] // convert the whole string to a slice
+}
+```
+
+Rust enforces that as long as the resulting value is used, the string can't get cleared (i.e., a slice is an immutable reference).
+
+> This is why string literals are immutable: `&str` is an immutable reference.
+
+(To a string hard-coded in the code and put into the stack.)
+
+It's a good practice to **use `&str` in function signatures**, not `&String`, because it is more general. `String` can be easily converted to a slice as `&s[..]`. And string literals (and their sub-strings) are slices already. So we get a universal API. Arrays also have slices. (Vectors too, I suppose?)
+
+
+
+
+
+
+
+
+
+
+
+
