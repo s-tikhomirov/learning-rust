@@ -286,16 +286,18 @@ pub fn eat_at_restaurant() {
 }
 ```
 
+Wait a sec, what's the difference between `mod` and `use`? Apparently that's where many novices stumble :) 
 
+https://panaetius.io/post/2020/11/the-difference-between-mod-and-use-in-rust/
+> When you use mod in this way and compile, Cargo brings the contents of utilities.rs and inserts it into the current file.
 
+(this way referring to `pub mod utilities;`)
 
+> using `use` simply brings an item into the current namespace so you can access it more easily. Whereas `mod` (without a body block {}) literally brings the contents of a file and inserts in its place.
 
+OK, so the question is: does the compiler _know_ where to look for the code of a module we want to use...
 
-
-
-
-
-
+Made the first attempt at establishing the module structure, still have no intuition what I'm doing and why (see [this commit](https://github.com/s-tikhomirov/ln-jamming-simulator-rust/commit/2df2114)). One of the questions: it feels like in the root there should be `main.rs`, `lib.rs`, and everything else in its own dedicated directory. It looks weird where the two root files are mixed with regular source code files. Indeed, [this example](https://doc.rust-lang.org/cargo/guide/project-layout.html) of a typical project layout shows that all source files apart from the two root ones are in the `bin` directory (which is confusing: for me `bin` means binary, i.e., what the compiler produces; and here we have Rust source files in `bin` referred to as "executables"; maybe I misunderstand something?). Anyway, this structure looks logical, disregarding the `bin` name, but I'm not sure how to initialize modules in `lib.rs` then.
 
 
 
